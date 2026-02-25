@@ -1,0 +1,54 @@
+---
+kind: pipeline
+type: exec
+name: cronRebase
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+    branch:
+        include:
+            - master
+
+steps:
+  - name: sync repo
+    commands:
+      - git remote add upstream https://github.com/Genymobile/scrcpy
+      - git fetch upstream
+      - git rebase upstream/master
+      - git remote set-url origin git@github.com:dangherve/scrcpy.git
+      - git push --force --set-upstream origin master
+
+node:
+  internet: high
+
+---
+kind: pipeline
+type: exec
+name: rebase
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+    branch:
+        exclude:
+            - master
+
+steps:
+  - name: sync repo
+    commands:
+      - git remote add upstream https://github.com/Genymobile/scrcpy
+      - git fetch
+      - git checkout master
+      - git fetch upstream
+      - git rebase upstream/master
+      - git remote set-url origin git@github.com:dangherve/scrcpy.git
+      - git push --force --set-upstream origin master
+
+node:
+  internet: high
+

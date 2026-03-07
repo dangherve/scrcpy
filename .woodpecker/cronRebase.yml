@@ -6,9 +6,8 @@ steps:
         - ./buildTools/rebase.sh
 
 when:
-  - event:
+    event:
         - cron
-    cron: rebase
     branch:
         - master
 

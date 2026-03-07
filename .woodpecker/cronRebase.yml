@@ -8,6 +8,7 @@ steps:
 when:
   - event:
         - cron
+    cron: rebase
     branch:
         - master
 

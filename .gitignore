@@ -10,3 +10,5 @@ local.properties
 /scrcpy-server
 
 !buildTools
+
+!.woodpecker
